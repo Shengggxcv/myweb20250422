@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8">
+  <title>加總 1 到 100</title>
+</head>
+<body>
+<h1>加總 1 到 100</h1>
+<p id="result"></p>
+
+<script>
+  let sum = 0;
+  for (let i = 1; i <= 100; i++) {
+    sum += i; // 等同於 sum = sum + i
+  }
+
+  document.getElementById('result').textContent = `1 + 2 + 3 + ... + 100 = ${sum}`;
+</script>
+</body>
+</html>

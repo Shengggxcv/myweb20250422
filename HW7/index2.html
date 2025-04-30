@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8">
+  <title>升級版計算器</title>
+  <style>
+    body {
+      font-family: sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      background-color: #f0f2f5;
+    }
+    .calculator {
+      background: white;
+      padding: 20px;
+      border-radius: 20px;
+      box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+      width: 300px;
+    }
+    .display {
+      font-size: 24px;
+      height: 50px;
+      margin-bottom: 10px;
+      background: #f5f5f5;
+      padding: 10px;
+      text-align: right;
+      border-radius: 10px;
+      overflow-x: auto;
+    }
+    .buttons {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 10px;
+    }
+    button {
+      padding: 20px;
+      font-size: 18px;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+      background-color: #e0e0e0;
+      transition: background 0.2s;
+    }
+    button:hover {
+      background-color: #ccc;
+    }
+    .equal {
+      background-color: #4CAF50;
+      color: white;
+    }
+    .clear {
+      background-color: #f44336;
+      color: white;
+    }
+    .delete {
+      background-color: #ff9800;
+      color: white;
+    }
+  </style>
+</head>
+<body>
+<div class="calculator">
+  <div class="display" id="display">0</div>
+  <div class="buttons">
+    <button onclick="press('7')">7</button>
+    <button onclick="press('8')">8</button>
+    <button onclick="press('9')">9</button>
+    <button onclick="press('/')">÷</button>
+
+    <button onclick="press('4')">4</button>
+    <button onclick="press('5')">5</button>
+    <button onclick="press('6')">6</button>
+    <button onclick="press('*')">×</button>
+
+    <button onclick="press('1')">1</button>
+    <button onclick="press('2')">2</button>
+    <button onclick="press('3')">3</button>
+    <button onclick="press('-')">－</button>
+
+    <button onclick="press('0')">0</button>
+    <button onclick="press('.')">.</button>
+    <button onclick="calculate()" class="equal">＝</button>
+    <button onclick="press('+')">＋</button>
+
+    <button onclick="clearDisplay()" class="clear">C</button>
+    <button onclick="deleteLast()" class="delete">←</button>
+  </div>
+</div>
+
+<script>
+  let expression = '';
+
+  function press(value) {
+    if (expression === '0' && value !== '.') {
+      expression = value;
+    } else {
+      expression += value;
+    }
+    updateDisplay();
+  }
+
+  function updateDisplay() {
+    document.getElementById('display').textContent = expression || '0';
+  }
+
+  function clearDisplay() {
+    expression = '';
+    updateDisplay();
+  }
+
+  function deleteLast() {
+    expression = expression.slice(0, -1);
+    updateDisplay();
+  }
+
+  function calculate() {
+    try {
+      const result = eval(expression);
+      expression = result.toString();
+      updateDisplay();
+    } catch (e) {
+      expression = '';
+      document.getElementById('display').textContent = '錯誤';
+    }
+  }
+</script>
+</body>
+</html>
